@@ -55,7 +55,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp negative.bin /lib/firmware
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
 fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree-overlays/fpga
 fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/overlays/fpga/dtbo
-[ 1462.560122] fpga_manager fpga0: writing negative.bin to Xilinx ZynqMP FPGA Manager
+[   56.218477] fpga_manager fpga0: writing negative.bin to Xilinx ZynqMP FPGA Manager
 ```
 
 ### Configuraiton PL Clock 0
@@ -64,13 +64,13 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fclk0-zynqmp.dtb fclk0-zynqmp.dts
 fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree-overlays/fclk0
 fpga@debian-fpga:~/examples/negative$ sudo cp fclk0-zynqmp.dtb /config/device-tree/overlays/fclk0/dtbo
-[ 1830.238976] fclkcfg amba:fclk0: driver installed.
-[ 1830.243617] fclkcfg amba:fclk0: device name    : fclk0
-[ 1830.248737] fclkcfg amba:fclk0: clock  name    : pl0
-[ 1830.253678] fclkcfg amba:fclk0: clock  rate    : 99999999
-[ 1830.259085] fclkcfg amba:fclk0: clock  enabled : 1
-[ 1830.263833] fclkcfg amba:fclk0: remove rate    : 1000000
-[ 1830.269125] fclkcfg amba:fclk0: remove enable  : 0
+[  111.238976] fclkcfg amba:fclk0: driver installed.
+[  111.243617] fclkcfg amba:fclk0: device name    : fclk0
+[  111.248737] fclkcfg amba:fclk0: clock  name    : pl0
+[  111.253678] fclkcfg amba:fclk0: clock  rate    : 99999999
+[  111.259085] fclkcfg amba:fclk0: clock  enabled : 1
+[  111.263833] fclkcfg amba:fclk0: remove rate    : 1000000
+[  111.269125] fclkcfg amba:fclk0: remove enable  : 0
 ```
 
 ### Install Uio and Udmabuf Device Tree
@@ -79,6 +79,22 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fclk0-zynqmp.dtb /config/device-tr
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o negative.dtb negative.dts
 fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree/overlays/negative
 fpga@debian-fpga:~/examples/negative$ sudo cp negative.dtb /config/device-tree/overlays/negative/dtbo
+[  164.123998] udmabuf amba_pl@0:negative-udmabuf4: driver probe start.
+[  164.131871] udmabuf udmabuf4: driver installed
+[  164.136254] udmabuf udmabuf4: major number   = 244
+[  164.141021] udmabuf udmabuf4: minor number   = 0
+[  164.145619] udmabuf udmabuf4: phys address   = 0x0000000070400000
+[  164.151689] udmabuf udmabuf4: buffer size    = 1048576
+[  164.156811] udmabuf udmabuf4: dma coherent   = 0
+[  164.161412] udmabuf amba_pl@0:negative-udmabuf4: driver installed.
+[  164.167998] udmabuf amba_pl@0:negative-udmabuf5: driver probe start.
+[  164.175758] udmabuf udmabuf5: driver installed
+[  164.180142] udmabuf udmabuf5: major number   = 244
+[  164.184917] udmabuf udmabuf5: minor number   = 1
+[  164.189505] udmabuf udmabuf5: phys address   = 0x0000000070500000
+[  164.195576] udmabuf udmabuf5: buffer size    = 1048576
+[  164.200698] udmabuf udmabuf5: dma coherent   = 0
+[  164.205298] udmabuf amba_pl@0:negative-udmabuf5: driver installed.
 ```
 
 ## Run negative.py
