@@ -12,14 +12,14 @@ ZynqMP-FPGA-Linux Example (2) binary and test code for UltraZed-EG-IOCC
 
 fpga'password is "fpga".
 
-```
+```console
 debian-fpga login: fpga
 Password:
 fpga@debian-fpga:~$
 ```
 ## Download this repository
 
-```shell
+```console
 fpga@debian-fpga:~$ mkdir examples
 fpga@debian-fpga:~$ cd examples
 fpga@debian-fpga:~/examples$ git clone https://github.com/ikwzm/ZynqMP-FPGA-Linux-Example-2-UltraZed negative
@@ -31,7 +31,7 @@ fpga@debian-fpga:~/examples/negative
 
 ### Convert to Binary file from Bitstream file
 
-```shell
+```console
 fpga@debian-fpga:~/examples/negative$ python3 fpga-bit-to-bin.py -f negative.bit negative.bin
 Design name: b'negative;UserID=0XFFFFFFFF;Version=2017.2.1\x00'
 Full bitstream
@@ -45,13 +45,13 @@ Writing data...
 
 ### Copy FPGA Binary file to /lib/firmware
 
-```shell
+```console
 fpga@debian-fpga:~/examples/negative$ sudo cp negative.bin /lib/firmware
 ```
 
 ### Configuration FPGA with Device Tree Overlay
 
-```shell
+```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
 fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree-overlays/fpga
 fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/overlays/fpga/dtbo
@@ -60,7 +60,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/
 
 ### Configuraiton PL Clock 0
 
-```shell
+```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fclk0-zynqmp.dtb fclk0-zynqmp.dts
 fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree-overlays/fclk0
 fpga@debian-fpga:~/examples/negative$ sudo cp fclk0-zynqmp.dtb /config/device-tree/overlays/fclk0/dtbo
@@ -75,7 +75,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fclk0-zynqmp.dtb /config/device-tr
 
 ### Install Uio and Udmabuf Device Tree
 
-```shell
+```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o negative.dtb negative.dts
 fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree/overlays/negative
 fpga@debian-fpga:~/examples/negative$ sudo cp negative.dtb /config/device-tree/overlays/negative/dtbo
@@ -99,7 +99,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp negative.dtb /config/device-tree/o
 
 ## Run negative.py
 
-```shell
+```console
 fpga@debian-fpga:~/examples/negative$ sudo python3 negative.py
 total:9.228[msec] setup:0.803[msec] xfer:7.894[msec] cleanup:0.532[msec]
 total:1.093[msec] setup:0.618[msec] xfer:0.020[msec] cleanup:0.455[msec]
@@ -113,7 +113,7 @@ total:8.956[msec] setup:0.608[msec] xfer:7.889[msec] cleanup:0.459[msec]
 average_setup_time  :0.624[msec]
 average_cleanup_time:0.464[msec]
 average_xfer_time   :1.769[msec]
-thougput            :148.187[MByte/sec]
+throughput          :148.187[MByte/sec]
 np.negative(udmabuf4) == udmabuf5 : OK
 ```
 
@@ -126,7 +126,7 @@ np.negative(udmabuf4) == udmabuf5 : OK
 
 ### Download this repository
 
-```shell
+```console
 shell$ git clone https://github.com/ikwzm/ZynqMP-FPGA-Linux-Example-2-UltraZed 
 shell$ cd ZynqMP-FPGA-Linux-Example-2-UltraZed 
 shell$ git submodule init
@@ -135,21 +135,21 @@ shell$ git submodule update
 
 ### Run Vivado HLS
 
-```
+```console
 vivado% cd hls
 vivado% vivado_hls -f run_hls.tcl
 ```
 
 ### Create Vivado Project
 
-```
+```console
 vivado% cd project
 vivado% vivado -mode batch -source create_project.tcl
 ```
 
 ### Build Bitstream file
 
-```
+```console
 vivado% cd project
 vivado% vivado -mode batch -source implementation.tcl
 vivado% cp project.runs/impl_1/design_1_wrapper.bit ../negative.bit

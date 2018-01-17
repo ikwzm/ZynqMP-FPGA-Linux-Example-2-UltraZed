@@ -64,7 +64,7 @@ if __name__ == '__main__':
     print ("average_setup_time  :{0:.3f}".format(round((total_setup_time  /count)*1000.0,3)) + "[msec]")
     print ("average_cleanup_time:{0:.3f}".format(round((total_cleanup_time/count)*1000.0,3)) + "[msec]")
     print ("average_xfer_time   :{0:.3f}".format(round((total_xfer_time   /count)*1000.0,3)) + "[msec]")
-    print ("thougput            :{0:.3f}".format(round(((total_xfer_size/total_xfer_time)/(1000*1000)),3)) + "[MByte/sec]")
+    print ("throughput          :{0:.3f}".format(round(((total_xfer_size/total_xfer_time)/(1000*1000)),3)) + "[MByte/sec]")
 
     udmabuf4_negative_array = np.negative(udmabuf4_array)
     if np.array_equal(udmabuf4_negative_array, udmabuf5_array):
