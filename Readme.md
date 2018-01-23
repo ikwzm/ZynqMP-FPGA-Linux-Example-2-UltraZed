@@ -53,7 +53,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp negative.bin /lib/firmware
 
 ```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
-fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree-overlays/fpga
+fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree/overlays/fpga
 fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/overlays/fpga/dtbo
 [   56.218477] fpga_manager fpga0: writing negative.bin to Xilinx ZynqMP FPGA Manager
 ```
@@ -62,7 +62,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/
 
 ```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fclk0-zynqmp.dtb fclk0-zynqmp.dts
-fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree-overlays/fclk0
+fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree/overlays/fclk0
 fpga@debian-fpga:~/examples/negative$ sudo cp fclk0-zynqmp.dtb /config/device-tree/overlays/fclk0/dtbo
 [  111.238976] fclkcfg amba:fclk0: driver installed.
 [  111.243617] fclkcfg amba:fclk0: device name    : fclk0
