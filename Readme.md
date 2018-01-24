@@ -117,6 +117,21 @@ throughput          :148.187[MByte/sec]
 np.negative(udmabuf4) == udmabuf5 : OK
 ```
 
+## Clean up
+
+```console
+fpga@debian-fpga:~/examples/negative$ sudo rmdir /config/device-tree/overlays/netagive
+[  749.266776] udmabuf udmabuf5: driver uninstalled
+[  749.271568] udmabuf amba_pl@0:negative-udmabuf5: driver unloaded
+[  749.277680] udmabuf udmabuf4: driver uninstalled
+[  749.282536] udmabuf amba_pl@0:negative-udmabuf4: driver unloaded
+fpga@debian-fpga:~/examples/negative$ sudo rmdir /config/device-tree/overlays/fclk0
+[  760.491074] fclkcfg amba:fclk0: change rate    : 992064
+[  760.496344] fclkcfg amba:fclk0: change enable  : 0
+[  760.501388] fclkcfg amba:fclk0: driver unloaded
+fpga@debian-fpga:~/examples/negative$ sudo rmdir /config/device-tree/overlays/fpga
+```
+
 ## Build Bitstream file
 
 ### Requirement
