@@ -3,12 +3,12 @@ ZynqMP-FPGA-Linux Example (2) for UltraZed
 
 ZynqMP-FPGA-Linux Example (2) binary and test code for UltraZed-EG-IOCC
 
-## Requirement
+# Requirement
 
  * Board: UltraZed-EG-IOCC
- * OS: ZynqMP-FPGA-Linux ([https://github.com/ikwzm/ZynqMP-FPGA-Linux](https://github.com/ikwzm/ZynqMP-FPGA-Linux)) v0.1.2
+ * OS: ZynqMP-FPGA-Linux ([https://github.com/ikwzm/ZynqMP-FPGA-Linux](https://github.com/ikwzm/ZynqMP-FPGA-Linux)) v2017.3 or v2018.2
 
-## Boot UltraZed-EG-IOCC and login fpga user
+# Boot UltraZed-EG-IOCC and login fpga user
 
 fpga'password is "fpga".
 
@@ -17,7 +17,10 @@ debian-fpga login: fpga
 Password:
 fpga@debian-fpga:~$
 ```
-## Download this repository
+
+# Download this repository
+
+## Download this repository for v2017.3
 
 ```console
 fpga@debian-fpga:~$ mkdir examples
@@ -27,9 +30,19 @@ fpga@debian-fpga:~/examples$ cd negative
 fpga@debian-fpga:~/examples/negative$ git checkout v2017.3
 ```
 
-## Setup
+## Download this repository for v2018.2
 
-### Convert to Binary file from Bitstream file
+```console
+fpga@debian-fpga:~$ mkdir examples
+fpga@debian-fpga:~$ cd examples
+fpga@debian-fpga:~/examples$ git clone https://github.com/ikwzm/ZynqMP-FPGA-Linux-Example-2-UltraZed negative
+fpga@debian-fpga:~/examples$ cd negative
+fpga@debian-fpga:~/examples/negative$ git checkout v2018.2
+```
+
+# Setup
+
+## Convert to Binary file from Bitstream file
 
 ```console
 fpga@debian-fpga:~/examples/negative$ python3 fpga-bit-to-bin.py -f negative.bit negative.bin
@@ -43,13 +56,15 @@ Flipping data...
 Writing data...
 ```
 
-### Copy FPGA Binary file to /lib/firmware
+## Copy FPGA Binary file to /lib/firmware
 
 ```console
 fpga@debian-fpga:~/examples/negative$ sudo cp negative.bin /lib/firmware
 ```
 
-### Configuration FPGA with Device Tree Overlay
+## Configuration FPGA with Device Tree Overlay
+
+### For v2017.3
 
 ```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
@@ -58,7 +73,20 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/
 [   56.218477] fpga_manager fpga0: writing negative.bin to Xilinx ZynqMP FPGA Manager
 ```
 
-### Configuraiton PL Clock 0
+### For v2018.2
+
+```console
+fpga@debian-fpga:~/examples/gpio$ echo 20 >/sys/class/fpga_manager/fpga0/flags
+```
+
+```console
+fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
+fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree/overlays/fpga
+fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/overlays/fpga/dtbo
+[   56.218477] fpga_manager fpga0: writing negative.bin to Xilinx ZynqMP FPGA Manager
+```
+
+## Configuraiton PL Clock 0
 
 ```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fclk0-zynqmp.dtb fclk0-zynqmp.dts
@@ -73,7 +101,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp fclk0-zynqmp.dtb /config/device-tr
 [  111.269125] fclkcfg amba:fclk0: remove enable  : 0
 ```
 
-### Install Uio and Udmabuf Device Tree
+## Install Uio and Udmabuf Device Tree
 
 ```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o negative.dtb negative.dts
@@ -97,7 +125,7 @@ fpga@debian-fpga:~/examples/negative$ sudo cp negative.dtb /config/device-tree/o
 [  164.205298] udmabuf amba_pl@0:negative-udmabuf5: driver installed.
 ```
 
-## Run negative.py
+# Run negative.py
 
 ```console
 fpga@debian-fpga:~/examples/negative$ sudo python3 negative.py
@@ -117,7 +145,7 @@ throughput          :148.187[MByte/sec]
 np.negative(udmabuf4) == udmabuf5 : OK
 ```
 
-## Clean up
+# Clean up
 
 ```console
 fpga@debian-fpga:~/examples/negative$ sudo rmdir /config/device-tree/overlays/netagive

@@ -4,8 +4,8 @@ import numpy as np
 import time
 
 if __name__ == '__main__':
-    uio0       = Uio('uio0')
-    regs       = uio0.regs()
+    uio1       = Uio('uio1')
+    regs       = uio1.regs()
     udmabuf4   = Udmabuf('udmabuf4')
     udmabuf5   = Udmabuf('udmabuf5')
     test_dtype = np.uint32
@@ -37,10 +37,10 @@ if __name__ == '__main__':
         regs.write_word(0x04, 0x000000001)
         regs.write_word(0x08, 0x000000001)
         regs.write_word(0x0C, 0x000000001)
-        uio0.irq_on()
+        uio1.irq_on()
         phase0_time = time.time()
         regs.write_word(0x00, 0x000000001)
-        uio0.wait_irq()
+        uio1.wait_irq()
 
         phase1_time = time.time()
         regs.write_word(0x0C, 0x000000001)
