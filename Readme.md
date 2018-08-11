@@ -24,7 +24,7 @@ fpga@debian-fpga:~$ mkdir examples
 fpga@debian-fpga:~$ cd examples
 fpga@debian-fpga:~/examples$ git clone https://github.com/ikwzm/ZynqMP-FPGA-Linux-Example-2-UltraZed negative
 fpga@debian-fpga:~/examples$ cd negative
-fpga@debian-fpga:~/examples/negative
+fpga@debian-fpga:~/examples/negative$ git checkout v2017.3
 ```
 
 ## Setup
