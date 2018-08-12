@@ -42,7 +42,7 @@ fpga@debian-fpga:~/examples/negative$ git checkout v2018.2
 
 # Setup
 
-## Convert to Binary file from Bitstream file
+## Convert to Binary file from Bitstream file for 2017.3
 
 ### For 2017.3
 
@@ -56,12 +56,6 @@ Time b'10:39:58\x00'
 Found binary data: 5568668
 Flipping data...
 Writing data...
-```
-
-### For 2018.2
-
-```console
-vivado% bootgen -image negative.bif -arch zynqmp -w -o negative.bin
 ```
 
 ## Copy FPGA Binary file to /lib/firmware
@@ -191,3 +185,8 @@ vivado% vivado -mode batch -source implementation.tcl
 vivado% cp project.runs/impl_1/design_1_wrapper.bit ../negative.bit
 ```
 
+### Convert to Binary file from Bitstream file for 2018.2
+
+```console
+vivado% bootgen -image negative.bif -arch zynqmp -w -o negative.bin
+```
