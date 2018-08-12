@@ -44,6 +44,8 @@ fpga@debian-fpga:~/examples/negative$ git checkout v2018.2
 
 ## Convert to Binary file from Bitstream file
 
+### For 2017.3
+
 ```console
 fpga@debian-fpga:~/examples/negative$ python3 fpga-bit-to-bin.py -f negative.bit negative.bin
 Design name: b'negative;UserID=0XFFFFFFFF;Version=2017.2.1\x00'
@@ -56,6 +58,12 @@ Flipping data...
 Writing data...
 ```
 
+### For 2018.2
+
+```console
+vivado% bootgen -image negative.bif -arch zynqmp -w -o negative.bin
+```
+
 ## Copy FPGA Binary file to /lib/firmware
 
 ```console
@@ -63,21 +71,6 @@ fpga@debian-fpga:~/examples/negative$ sudo cp negative.bin /lib/firmware
 ```
 
 ## Configuration FPGA with Device Tree Overlay
-
-### For v2017.3
-
-```console
-fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
-fpga@debian-fpga:~/examples/negative$ sudo mkdir /config/device-tree/overlays/fpga
-fpga@debian-fpga:~/examples/negative$ sudo cp fpga-load.dtb /config/device-tree/overlays/fpga/dtbo
-[   56.218477] fpga_manager fpga0: writing negative.bin to Xilinx ZynqMP FPGA Manager
-```
-
-### For v2018.2
-
-```console
-fpga@debian-fpga:~/examples/gpio$ echo 20 >/sys/class/fpga_manager/fpga0/flags
-```
 
 ```console
 fpga@debian-fpga:~/examples/negative$ dtc -I dts -O dtb -o fpga-load.dtb fpga-load.dts
